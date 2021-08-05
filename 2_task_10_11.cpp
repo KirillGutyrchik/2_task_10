@@ -8,7 +8,12 @@ bool isNumber(const std::string& str)
     if(str.empty())
         return false;
 
-    return std::all_of(str.begin() + (str[0] == '-' || str[0] == '+'),
+    bool sign_flag = (str[0] == '-' || str[0] == '+');
+
+    if(sign_flag && str.size() == 1)
+        return false;
+
+    return std::all_of(str.begin() + sign_flag,
                 str.end(),
                 [](const char sym){
                     return std::isdigit(sym);
